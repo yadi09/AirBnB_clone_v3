@@ -7,7 +7,7 @@ from models import storage
 from models.amenity import Amenity
 
 
-@app_views.route('/amenities', methods=['GET'], strict_slashes=False)
+@app_views.route('/amenities', methods=['GET'])
 def amnty():
     """return list of obj"""
     amnty = storage.all(Amenity)
