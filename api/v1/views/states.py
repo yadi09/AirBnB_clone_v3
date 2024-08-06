@@ -5,17 +5,16 @@ from api.v1.views import app_views
 from models import storage
 from models.state import State
 from flask import abort, make_response, jsonify, request
-app.url_map.strict_slashes = False
 
 
-@app_views.route('/states', methods=['GET'])
+@app_views.route('/states', methods=['GET'], strict_slashes = False)
 def states():
     '''Retrieves all list of state'''
     states = storage.all(State)
     return jsonify([obj.to_dict() for obj in states.values()])
 
 
-@app_views.route('/states/<state_id>')
+@app_views.route('/states/<state_id>', strict_slashes = False)
 def state(state_id):
     '''single state retrive by id'''
     states = storage.all(State)
@@ -25,7 +24,8 @@ def state(state_id):
     abort(404)
 
 
-@app_views.route('/states/<state_id>', methods=['DELETE'])
+@app_views.route('/states/<state_id>', methods=['DELETE'],
+                 strict_slashes = False)
 def del_state(state_id):
     '''delete state object by id'''
     states = storage.all(State)
@@ -37,7 +37,7 @@ def del_state(state_id):
     abort(404)
 
 
-@app_views.route('/states', methods=['POST'])
+@app_views.route('/states', methods=['POST'], strict_slashes = False)
 def post_state():
     '''post(create) new state with status-201'''
     new_state = request.get_json()
@@ -51,7 +51,7 @@ def post_state():
     return make_response(jsonify(state.to_dict()), 201)
 
 
-@app_views.route('/states/<state_id>', methods=['PUT'])
+@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes = False)
 def put_state(state_id):
     '''Updates a State object'''
     state = storage.all(State)
