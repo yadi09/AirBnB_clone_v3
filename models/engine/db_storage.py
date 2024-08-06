@@ -27,10 +27,10 @@ class DBStorage:
 
     def __init__(self):
         """Instantiate a DBStorage object"""
-        HBNB_MYSQL_USER = getenv('HBNB_MYSQL_USER')
-        HBNB_MYSQL_PWD = getenv('HBNB_MYSQL_PWD')
-        HBNB_MYSQL_HOST = getenv('HBNB_MYSQL_HOST')
-        HBNB_MYSQL_DB = getenv('HBNB_MYSQL_DB')
+        HBNB_MYSQL_USER = "yadi09" #getenv('HBNB_MYSQL_USER')
+        HBNB_MYSQL_PWD = "Yadi_0988" #getenv('HBNB_MYSQL_PWD')
+        HBNB_MYSQL_HOST = "localhost" #getenv('HBNB_MYSQL_HOST')
+        HBNB_MYSQL_DB = "hbnb_test_db" #getenv('HBNB_MYSQL_DB')
         HBNB_ENV = getenv('HBNB_ENV')
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
                                       format(HBNB_MYSQL_USER,
@@ -74,3 +74,16 @@ class DBStorage:
     def close(self):
         """call remove() method on the private session attribute"""
         self.__session.remove()
+
+    def get(self, cls, id):
+        """Returns the object based on the class and its ID"""
+        objs = self.all(cls)
+        for key in objs:
+            if id in key:
+                return(str(objs[key]))
+        return None
+
+    def count(self, cls=None):
+        """Returns the number of objects in storage matching"""
+        objs = self.all(cls)
+        return(len(objs))
