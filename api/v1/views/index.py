@@ -1,19 +1,19 @@
 #!/usr/bin/python3
-'''index page application route'''
-from api.v1.views import app_views
+'''Index application route to status.'''
 from flask import jsonify
+from api.v1.views import app_views
 from models import storage
 
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
 def status():
-    """ status"""
+    """Return status ok"""
     return jsonify(status="OK")
 
 
 @app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def stat():
-    """endpoint that retrieves the number of each objects"""
+    """return number of each class object"""
     return jsonify(
         amenities=storage.count('Amenity'),
         cities=storage.count('City'),
