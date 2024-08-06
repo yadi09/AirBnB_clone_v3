@@ -1,4 +1,4 @@
-#!/isr/bin/python3
+#!/usr/bin/python3
 '''cities module for city objects'''
 
 from flask import abort, jsonify, make_response, request
